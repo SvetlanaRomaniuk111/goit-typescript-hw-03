@@ -21,9 +21,15 @@ class Person implements IPerson {
 }
 
 abstract class House {
-	constructor(protected tenants: Array<Person>, protected door: boolean) {}
-	comeIn(person: Person): Array<Person> {
-		return this.door ? (this.tenants = [...this.tenants, person]) : this.tenants
+	protected tenants: Array<Person> = []
+	protected door: boolean = false
+
+	constructor(protected key: Key) {}
+
+	comeIn(person: Person): void {
+		if (this.door) {
+			this.tenants = [...this.tenants, person]
+		}
 	}
 
 	abstract openDoor(key: Key): void
